@@ -43,7 +43,7 @@ function registerUserInDB(username, password, registrationCallback){
 function getUserFromCrentials(username, password, callback) {
 
   //create query using the data in the req.body to register the user in the db
-  const getUserQuery = `SELECT * FROM users WHERE username = '${username}' AND user_password = SHA('${password}')`
+  const getUserQuery = `SELECT * FROM users WHERE username = '${username}' AND user_password = SHA('${password}')`;
 
   console.log('getUserFromCrentials query is: ', getUserQuery);
 
@@ -53,6 +53,14 @@ function getUserFromCrentials(username, password, callback) {
       //pass in the error which may be null and pass the results object which we get the user from if it is not null
       callback(false, dataResponseObject.results !== null && dataResponseObject.results.length  === 1 ?  dataResponseObject.results[0] : null)
   })
+}
+
+function deleteUser(user, password, callback){
+    const getUserQuery = `DELETE FROM users WHERE username = '${username}' AND user_password = SHA('${password}')`;
+    
+    mySqlConnection.query(getUserQuery, (dataResponseObject) => {
+      callback(false, "success")
+    })
 }
 
 /**

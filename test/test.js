@@ -1,16 +1,58 @@
-var assert = require('assert');
+var server = require('../index.js');
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var should = chai.should();
+var request = require('request');
+chai.use(chaiHttp);
 
-
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal([1,2,3].indexOf(4), -1);
-    });
-  });
+/*
+it('should contain bearer token', function(done){
+	chai.request(server)
+	.post('/auth/login')
+	.sent({	'username': 'joris',
+		  	'user_password': 'testpwd',
+			'client_secret': 'null',
+			'client_id': 'null'})
+	.end(function(err, res){
+		if(err) done(err);
+		res.body.should.have.property('access_token');
+		done();
+	});
 });
+*/
 
-it('double done', function(done) {
-  // Calling `done()` twice is an error
-  setImmediate(done);
+
+
+it('should contain bearer token', function(done){
+	
+	
+	var req = {
+     host: 'http://127.0.0.1:8080',
+     path: 'auth/login',
+     method: 'POST',
+     headers: {
+		'content-Type': 'application/x-www-form-urlencoded',
+		'type': 'json'
+     }
+ 	};
+	
+	var body = {
+			username: 'joris',
+		  	password: 'testpwd',
+			grant_type: 'password',
+			client_secret: 'null',
+			client_id: 'null'};
+	var headers = {
+		'content-Type': 'application/x-www-form-urlencoded',
+		'type': 'json'
+	}
+	request.post({url: 'http://127.0.0.1:8080/auth/login', headers: headers, body: JSON.stringify(body)},
+				 function optionalCallback(err, httpResponse, body) {
+  					if (err) {
+    					return console.error(err);
+						done();
+  					}
+  			console.log('successful!  Server responded with:', body);
+		done();
+	});
 });
-

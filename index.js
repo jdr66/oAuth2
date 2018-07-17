@@ -38,7 +38,7 @@ expressApp.use('/restrictedArea', restrictedAreaRoutes)
 //MARK: --- INITIALISE MIDDLEWARE & ROUTES
 
 //init the server
-expressApp.listen(port, () => {
+module.exports = expressApp.listen(port, () => {
 
    console.log(`listening on port ${port}`)
 })
