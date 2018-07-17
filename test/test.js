@@ -5,23 +5,6 @@ var should = chai.should();
 var request = require('request');
 chai.use(chaiHttp);
 
-/*
-it('should contain bearer token', function(done){
-	chai.request(server)
-	.post('/auth/login')
-	.sent({	'username': 'joris',
-		  	'user_password': 'testpwd',
-			'client_secret': 'null',
-			'client_id': 'null'})
-	.end(function(err, res){
-		if(err) done(err);
-		res.body.should.have.property('access_token');
-		done();
-	});
-});
-*/
-
-
 
 it('should contain bearer token', function(done){
 	

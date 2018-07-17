@@ -48,7 +48,6 @@ try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.bo
 
 function login(registerUserQuery, res){
 
-
 }
 
 //sends a response created out of the specified parameters to the client.
